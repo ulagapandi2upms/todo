@@ -30,7 +30,6 @@ class NotesDatabase {
     await db.execute('''
 CREATE TABLE $tableNotes ( 
   ${NoteFields.id} $idType, 
-  ${NoteFields.emailId} $textType, 
   ${NoteFields.title} $textType,
   ${NoteFields.description} $textType,
   ${NoteFields.time} $textType
@@ -61,17 +60,14 @@ CREATE TABLE $tableNotes (
     }
   }
 
-  Future<List<Note>> readAllNotes(String emailId) async {
+  Future<List<Note>> readAllNotes() async {
     final db = await instance.database;
 
     final orderBy = '${NoteFields.time} ASC';
     // final result =
     //     await db.rawQuery('SELECT * FROM $tableNotes ORDER BY $orderBy');
 
-    final result = await db.query(tableNotes,
-        orderBy: orderBy,
-        where: '${NoteFields.emailId} = ?',
-        whereArgs: [emailId]);
+    final result = await db.query(tableNotes, orderBy: orderBy);
 
     return result.map((json) => Note.fromJson(json)).toList();
   }

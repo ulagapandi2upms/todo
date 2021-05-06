@@ -31,10 +31,7 @@ class _NotesPageState extends State<NotesPage> {
   Future refreshNotes() async {
     setState(() => isLoading = true);
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String emailId = prefs.getString('EmailId') ?? '';
-
-    this.notes = await NotesDatabase.instance.readAllNotes(emailId);
+     this.notes = await NotesDatabase.instance.readAllNotes();
 
     setState(() => isLoading = false);
   }
