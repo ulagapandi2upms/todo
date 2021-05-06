@@ -155,8 +155,10 @@ class _SignupPageState extends State<SignupPage> {
                   child: SignupFormWidget(
                       onChangedName: (name) =>
                           setState(() => this.name = name.trim()),
-                      onChangedEmail: (emailid) =>
-                          setState(() => this.emailId = emailid.trim()),
+                      onChangedEmail: (emailid) => setState(() {
+                            
+                            this.emailId = emailid.trim();
+                          }),
                       onChangedPassword: (password) =>
                           setState(() => this.password = password.trim())),
                 ),

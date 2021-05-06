@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/utils/utils.dart';
 
 class LoginFormWidget extends StatelessWidget {
   final String? email;
@@ -60,9 +61,10 @@ class LoginFormWidget extends StatelessWidget {
           hintText: 'Enter Email id',
           hintStyle: TextStyle(color: Colors.white60, fontSize: 16),
         ),
-        validator: (title) => title != null && title.isEmpty
-            ? 'The emaild cannot be empty'
-            : null,
+        validator: (emailId) =>
+            emailId != null && emailId.isEmpty && emailId.isValidEmail()
+                ? 'Enter valid email id'
+                : null,
         onChanged: (text) {
           onChangedEmail(text);
         },
@@ -90,9 +92,10 @@ class LoginFormWidget extends StatelessWidget {
           hintText: 'Enter Password',
           hintStyle: TextStyle(color: Colors.white60, fontSize: 16),
         ),
-        validator: (title) => title != null && title.isEmpty
-            ? 'The password cannot be empty'
-            : null,
+        validator: (password) =>
+            password != null && password.isEmpty && (password.length >= 7)
+                ? 'Enter valid password'
+                : null,
         onChanged: onChangedPassword,
       );
 }

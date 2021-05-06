@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/db/notes_database.dart';
 import 'package:todo_app/model/note.dart';
 import 'package:todo_app/page/edit_note_page.dart';
@@ -19,6 +18,7 @@ class _NotesPageState extends State<NotesPage> {
   @override
   void initState() {
     super.initState();
+    refreshNotes();
   }
 
   @override
@@ -31,7 +31,7 @@ class _NotesPageState extends State<NotesPage> {
   Future refreshNotes() async {
     setState(() => isLoading = true);
 
-     this.notes = await NotesDatabase.instance.readAllNotes();
+    this.notes = await NotesDatabase.instance.readAllNotes();
 
     setState(() => isLoading = false);
   }

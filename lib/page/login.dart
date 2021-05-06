@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/db/user_database.dart';
 import 'package:todo_app/page/notes_page.dart';
 import 'package:todo_app/page/singup.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/utils/utils.dart';
 
 class SignupFormWidget extends StatelessWidget {
   final String? name;
@@ -66,8 +67,8 @@ class SignupFormWidget extends StatelessWidget {
           hintText: 'Enter your name',
           hintStyle: TextStyle(color: Colors.white60, fontSize: 16),
         ),
-        validator: (title) =>
-            title != null && title.isEmpty ? 'The name cannot be empty' : null,
+        validator: (name) =>
+            name != null && name.isEmpty ? 'The name cannot be empty' : null,
         onChanged: onChangedName,
       );
 
@@ -101,9 +102,11 @@ class SignupFormWidget extends StatelessWidget {
           hintText: 'Enter Email id',
           hintStyle: TextStyle(color: Colors.white60, fontSize: 16),
         ),
-        validator: (title) => title != null && title.isEmpty
-            ? 'The emaild cannot be empty'
-            : null,
+        validator: (emailId) {
+          emailId != null && emailId.isEmpty && emailId.isValidEmail()
+              ? 'The emaild cannot be empty'
+              : null;
+        },
         onChanged: (text) {
           onChangedEmail(text);
         },
@@ -131,8 +134,10 @@ class SignupFormWidget extends StatelessWidget {
           hintText: 'Enter Password',
           hintStyle: TextStyle(color: Colors.white60, fontSize: 16),
         ),
-        validator: (title) => title != null && title.isEmpty
-            ? 'The password cannot be empty'
+        validator: (password) => password != null &&
+                password.isEmpty &&
+                (password.trim().length >= 7)
+            ? 'The password cannot be empty or password length should be 8'
             : null,
         onChanged: onChangedPassword,
       );
